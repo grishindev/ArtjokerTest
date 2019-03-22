@@ -169,7 +169,7 @@ $(function () {
     });
 
     function buttonOnAndOff() {
-        if (emailStat === 1 && nameStat === 1 && regionStat === 1 && cityStat === 1) {
+        if (emailStat === 1 && nameStat === 1 && regionStat === 1 && cityStat === 1 && districtStat === 1) {
             $("#submit").removeAttr("disabled");
         } else {
             $("#submit").attr("disabled", "disabled");

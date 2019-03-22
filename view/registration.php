@@ -21,23 +21,21 @@
             <form action="../controllers/store.php" method="post">
 
                 <div class="form-group">
-                    <label for="name">ФИО:</label><span>&nbsp;&nbsp;&nbsp;</span><span id="nameinfo"></span><br>
+                    <label for="name">ФИО<span style="color:#ff0000">*</span>:</label><span>&nbsp;&nbsp;&nbsp;</span><span id="nameinfo"></span><br>
                     <input type="text" class="form-control" name="name" id="name" placeholder="Петренко Иван Васильевич" autofocus required>
                 </div>
 
                 <div class="form-group">
-                    <label for="email">E-mail:</label><span>&nbsp;&nbsp;&nbsp;</span><span id="emailinfo"></span><br>
+                    <label for="email">E-mail<span style="color:#ff0000">*</span>:</label><span>&nbsp;&nbsp;&nbsp;</span><span id="emailinfo"></span><br>
                     <input type="text" class="form-control" name="email" id="email" placeholder="example@mail.com" required>
                 </div>
 
                 <div class="form-group">
-                    <label for="region">Территория:</label>
+                    <label for="region">Территория<span style="color:#ff0000">*</span>:</label>
                     <select class="form-control region" name="region" id="region" required>
                         <option value="0" selected disabled>Область</option>
                         <?php
-
                         $query = $db->allRegionsQuery();
-
                         while ($row = $query->fetch(PDO::FETCH_OBJ)) {
                             echo "<option value='{$row->ter_id}'>$row->ter_name</option>";
                         }

@@ -7,7 +7,7 @@ $db = new QueryBuilder();
 $allEmailsNested = $db->getAllFromField("reg_users", "email");
 
 // Преобразуем полученный двумерный массив в строку, затем в нижний регистр и затем в одномерный массив
-$allEmails = $allEmailsNested[0][email]; // Помещаем первый элемент из входящего массива в новую
+$allEmails = $allEmailsNested[0][email]; // Помещаем первый элемент из входящего массива в новую строку
 $i = 1;
 while ($i < count($allEmailsNested)) {
     $allEmails = $allEmails . ',' . $allEmailsNested[$i][email];

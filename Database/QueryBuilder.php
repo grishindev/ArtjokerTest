@@ -74,25 +74,34 @@ class QueryBuilder
     // Подготовка запроса для выборки всех Областей
     function allRegionsQuery()
     {
-        $sql = "SELECT * FROM t_koatuu_tree WHERE ter_type_id=0";
+        $sql = "SELECT * FROM t_koatuu_tree WHERE ter_type_id=0 && reg_id!=80 && reg_id!=85";
         $query = $this->pdo->query($sql);
 
         return $query;
     }
 
-    // Подготовка запроса для выборки всех Городов / Районов области
+    // Подготовка запроса для выборки всех Городов
     function allCitiesQuery($region_ter_id)
     {
-        $sql = "SELECT ter_id, ter_name FROM t_koatuu_tree WHERE ter_pid=$region_ter_id";
+        $sql = "SELECT ter_id, ter_name, ter_address FROM t_koatuu_tree WHERE ter_pid=$region_ter_id && ter_type_id=1";
         $query = $this->pdo->query($sql);
 
         return $query;
     }
 
-    // Подготовка запроса для выборки всех Районов города / ПГТ / Сёл / Деревень
+    // Подготовка запроса для выборки всех Районов города
     function allDistrictsQuery($city_ter_id)
     {
-        $sql = "SELECT ter_address, ter_name FROM t_koatuu_tree WHERE ter_pid=$city_ter_id";
+        $sql = "SELECT ter_address, ter_name FROM t_koatuu_tree WHERE ter_pid=$city_ter_id && ter_type_id=3";
+        $query = $this->pdo->query($sql);
+
+        return $query;
+    }
+
+    // Подготовка запроса для получения адреса, если нет района города для выбора
+    function addressByTerId($city_ter_id)
+    {
+        $sql = "SELECT ter_address FROM t_koatuu_tree WHERE ter_id=$city_ter_id";
         $query = $this->pdo->query($sql);
 
         return $query;

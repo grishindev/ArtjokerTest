@@ -26,14 +26,26 @@ if (isset($_POST['region_ter_id']) && !empty($_POST['region_ter_id'])) {
     $query = $db->allCitiesQuery($region_ter_id);
 
     echo "<select class='form-control city' name='city'>";
-    echo "<option value='0' selected disabled>Город / Район области</option>";
+    echo "<option value='0' selected disabled>Город</option>";
+
+
+    if ($region_ter_id == '3200000000') {
+        echo "<option class='city cityVal' value='8000000000'>м.Київ</option>";
+    }
+
+    if ($region_ter_id == '0100000000') {
+        echo "<option class='city cityVal' value='8500000000'>м.Севастополь</option>";
+
+    }
+
     while ($row = $query->fetch(PDO::FETCH_OBJ)) {
         echo "<option class='city cityVal' value='{$row->ter_id}'>{$row->ter_name}</option>";
     }
+
     echo "</select>";
 
 } else {
-    echo "<select class='form-control city' name='city' disabled><option>Город / Район области</option></select>";
+    echo "<select class='form-control city' name='city' disabled><option>Город</option></select>";
 }
 
 ?>
