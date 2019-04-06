@@ -18,9 +18,9 @@ class QueryBuilder
     }
 
     // Список всех зарегистрированных пользователей
-        function allUsers($table)
+        function allUsers($table_1, $table_2)
         {
-            $sql = "SELECT id, name, email, territory FROM $table";
+            $sql = "SELECT id, name, email, ter_address FROM $table_1 INNER JOIN $table_2 ON ter_id=territory ORDER BY id";
             $statement = $this->pdo->prepare($sql);
 
             $statement->execute();
@@ -46,6 +46,8 @@ class QueryBuilder
 
         $statement = $this->pdo->prepare($sql);
         $statement->execute($data); //true || false
+
+        return $statement;
     }
 
     // Получение массива, состоящего из значений одного поля
@@ -92,7 +94,7 @@ class QueryBuilder
     // Подготовка запроса для выборки всех Районов города
     function allDistrictsQuery($city_ter_id)
     {
-        $sql = "SELECT ter_address, ter_name FROM t_koatuu_tree WHERE ter_pid=$city_ter_id && ter_type_id=3";
+        $sql = "SELECT ter_id, ter_name FROM t_koatuu_tree WHERE ter_pid=$city_ter_id && ter_type_id=3";
         $query = $this->pdo->query($sql);
 
         return $query;
@@ -101,7 +103,7 @@ class QueryBuilder
     // Подготовка запроса для получения адреса, если нет района города для выбора
     function addressByTerId($city_ter_id)
     {
-        $sql = "SELECT ter_address FROM t_koatuu_tree WHERE ter_id=$city_ter_id";
+        $sql = "SELECT ter_id FROM t_koatuu_tree WHERE ter_id=$city_ter_id";
         $query = $this->pdo->query($sql);
 
         return $query;

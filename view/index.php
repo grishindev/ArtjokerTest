@@ -1,6 +1,7 @@
 <?php
 
-$users = $db->allUsers('reg_users');
+$users = $db->allUsers('reg_users', 't_koatuu_tree');
+
 ?>
 
 <!DOCTYPE html>
@@ -35,7 +36,7 @@ $users = $db->allUsers('reg_users');
                     <td><?= $user['id']; ?></td>
                     <td><?= $user['name']; ?></td>
                     <td><?= $user['email']; ?></td>
-                    <td><?= $user['territory']; ?></td>
+                    <td><?= $user['ter_address']; ?></td>
                 </tr>
               <?php endforeach; ?>
               </tbody>

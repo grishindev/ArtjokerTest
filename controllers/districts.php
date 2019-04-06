@@ -28,27 +28,8 @@ if (isset($_POST['city_ter_id']) && !empty($_POST['city_ter_id'])) {
     echo "<select class='form-control district' name='district'>";
     echo "<option value='0' selected disabled>Район города</option>";
 
-
-    if ($city_ter_id == '8000000000') {
-
-        $addRegion = ', Київська область';
-
-        while ($row = $query->fetch(PDO::FETCH_OBJ)) {
-            echo "<option value='{$row->ter_address}{$addRegion}'>{$row->ter_name}</option>";
-        }
-    }
-
-    if ($city_ter_id == '8500000000') {
-
-        $addRegion = ', Автономна Республіка Крим';
-
-        while ($row = $query->fetch(PDO::FETCH_OBJ)) {
-            echo "<option value='{$row->ter_address}{$addRegion}'>{$row->ter_name}</option>";
-        }
-    }
-
     while ($row = $query->fetch(PDO::FETCH_OBJ)) {
-        echo "<option value='{$row->ter_address}'>{$row->ter_name}</option>";
+        echo "<option value='{$row->ter_id}'>{$row->ter_name}</option>";
     }
 
     // Выполняем следующий шаг, если у города нет районов для выбора
@@ -56,7 +37,7 @@ if (isset($_POST['city_ter_id']) && !empty($_POST['city_ter_id'])) {
         $query = $db->addressByTerId($city_ter_id);
 
         while ($row = $query->fetch(PDO::FETCH_OBJ)) {
-            echo "<option value='{$row->ter_address}'>-- Не выбирать район города --</option>";
+            echo "<option value='{$row->ter_id}'>-- Не выбирать район города --</option>";
         }
     }
 
